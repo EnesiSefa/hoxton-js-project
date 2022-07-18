@@ -1,5 +1,7 @@
 import './style.css'
 
-function render(){}
+function render(){
+    console.log('Hello!!!')
+}
 
 
