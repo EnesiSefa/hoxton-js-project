@@ -1,0 +1,52 @@
+{
+  "store": [
+    {
+      "id": 1,
+      "image": "https://images.samsung.com/is/image/samsung/p6pim/al/2202/gallery/al-galaxy-a53-5g-a536-sm-a536blbleuc-531392710?$650_519_PNG$",
+      "title": "Samsung a53",
+      "price": "399.99",
+      "discountPrice": "299.99",
+      "description": "The Samsung Galaxy a53 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
+    },
+    {
+      "id": 2,
+      "image": "https://images.samsung.com/al/smartphones/galaxy-s22-ultra/buy/02_carousel/04_basic-colors/s22_ultra_productkv_phantomblack_mo.jpg",
+      "title": "Samsung s22 ultra",
+      "price": "899.99",
+      "discountPrice": "799.99",
+      "description": "The Samsung Galaxy S22 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
+    },
+    {
+      "id": 3,
+      "image": "https://images.samsung.com/pk/smartphones/galaxy-z-flip3-5g/buy/zflip3_carousel_colorcombokv_mo.jpg",
+      "title": "Samsung Galaxy Z flip 3",
+      "price": "$699.99",
+      "discountPrice": "$599.99",
+      "description": "The Samsung Galaxy Z flip 3 is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
+    },
+    {
+      "id": 4,
+      "image": "https://images.samsung.com/ca/smartphones/galaxy-note20/buy/005-galaxynote20ultra-mysticblack-mo-720.jpg",
+      "title": "Samsung Note20",
+      "price": "699.99",
+      "discountPrice": "499.99",
+      "description": "The Samsung Galaxy Note20 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
+    },
+    {
+      "id": 5,
+      "image": "https://images.samsung.com/ca/smartphones/galaxy-note20/buy/005-galaxynote20ultra-mysticblack-mo-720.jpg",
+      "title": "Samsung Note20",
+      "price": "699.99",
+      "discountPrice": "499.99",
+      "description": "The Samsung Galaxy note20 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
+    },
+    {
+      "id": 6,
+      "image": "https://images.samsung.com/ca/smartphones/galaxy-note20/buy/005-galaxynote20ultra-mysticblack-mo-720.jpg",
+      "title": "Samsung Note20",
+      "price": "699.99",
+      "discountPrice": "499.99",
+      "description": "The Samsung Galaxy Note20 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
+    }
+  ]
+}
