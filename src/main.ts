@@ -31,12 +31,14 @@ function render() {
 function header() {
   let headerEl = document.createElement("header");
 
-  let h1El = document.createElement("h1");
-  h1El.textContent = "Al Tech";
-  h1El.addEventListener("click", function () {
+  let homeTitleLink = document.createElement("a")
+  let homeTitleEL = document.createElement("h1");
+  homeTitleEL.textContent = "Al Tech";
+  homeTitleEL.addEventListener("click", function () {
+    state.store = 
+    render()
+    // main()
     
-    render();
-    main();
   });
 
   let navEl = document.createElement("nav");
@@ -68,7 +70,8 @@ function header() {
   searchLiEl.append(searchSpanEl);
   ulEl.append(userLiEl, shoppingBagLiEl, searchLiEl);
   navEl.append(ulEl);
-  headerEl.append(h1El, navEl);
+  homeTitleLink.append(homeTitleEL)
+  headerEl.append(homeTitleLink, navEl);
   appEl?.append(headerEl);
 }
 
