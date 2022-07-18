@@ -35,7 +35,7 @@ function header() {
   let homeTitleEL = document.createElement("h1");
   homeTitleEL.textContent = "Al Tech";
   homeTitleEL.addEventListener("click", function () {
-    state.store = 
+    state.selected = null 
     render()
     // main()
     
