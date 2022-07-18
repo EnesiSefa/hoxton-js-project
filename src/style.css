@@ -6,3 +6,41 @@
   color: #2c3e50;
   margin-top: 60px;
 }
+/* *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+header{
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.header-list-item{
+  list-style: none;
+}
+
+
+main{
+  
+}
+
+.main-nav{
+  
+}
+.main-list{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  
+}
+.main-list-item{
+  list-style: none;
+  
+  
+
+}
+
+.image{
+  height: 200px;
+}
