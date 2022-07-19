@@ -37,18 +37,76 @@ main{
 }
 .main-list{
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  /* place-content: center; */
   
   
 }
 .main-list-item{
   list-style: none;
   outline: 1px solid black;
+
+}
+.price-container{
+  display: grid;
+}
+
+
+.price{
+  text-decoration: line-through;
+  color: red;
+
   
-  
+}
+
+.discount{
+  font-size: large;
+  color: green;
+
+}
+.image{
+  width: 200px;
 
 }
 
-.image{
-  height: 200px;
+
+.modal-wrapper{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.301);
+  padding: 2rem;
+  display: grid;
+  place-content: center;
+}
+
+.modal-container{
+  background-color: white;
+  padding: 2rem 3rem;
+  position: relative;
+  border-radius: 8px;
+
+}
+
+.modal-close-button{
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+
+}
+
+.single-main-list{
+  place-content: center;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.single-main-list-item{
+  list-style: none;
 }
