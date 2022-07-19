@@ -1,6 +1,6 @@
 import "./style.css";
 
-type Store = {
+type Item = {
   id: number;
   image: string;
   title: string;
@@ -10,8 +10,8 @@ type Store = {
 };
 
 type State = {
-  store: Store[];
-  selected: Store | null;
+  store: Item[];
+  selected: Item | null;
 };
 let state: State = {
   store: [],
@@ -35,7 +35,7 @@ function header() {
   let homeTitleEL = document.createElement("h1");
   homeTitleEL.textContent = "Al Tech";
   homeTitleEL.addEventListener("click", function () {
-    state.selected = null 
+    state.selected = null
     render()
     // main()
     
@@ -125,7 +125,7 @@ function getData() {
     });
 }
 
-function singleProduct(store: Store) {
+function singleProduct(store: Item) {
   let mainEl = document.createElement("main");
 
   let navEl = document.createElement("nav");
