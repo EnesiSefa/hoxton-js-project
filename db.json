@@ -20,8 +20,8 @@
       "id": 3,
       "image": "https://images.samsung.com/pk/smartphones/galaxy-z-flip3-5g/buy/zflip3_carousel_colorcombokv_mo.jpg",
       "title": "Samsung Galaxy Z flip 3",
-      "price": "$699.99",
-      "discountPrice": "$599.99",
+      "price": "699.99",
+      "discountPrice": "599.99",
       "description": "The Samsung Galaxy Z flip 3 is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
     },
     {
@@ -43,10 +43,20 @@
     {
       "id": 6,
       "image": "https://images.samsung.com/ca/smartphones/galaxy-note20/buy/005-galaxynote20ultra-mysticblack-mo-720.jpg",
+
       "title": "Samsung Note20",
       "price": "699.99",
       "discountPrice": "499.99",
       "description": "The Samsung Galaxy Note20 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
+    },
+    {
+      "id": 7,
+      "image": "https://globe.al/images/thumbnails/720/720/detailed/351/UE43AU8072A.jpg",
+      "title": "Samsung 43 4K UE43AU8072UXXH",
+      "price": "699.99",
+      "discountPrice": "599.99",
+      "description": "The Samsung Galaxy Note20 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
+
     }
   ]
 }
