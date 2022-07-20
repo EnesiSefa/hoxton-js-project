@@ -13,13 +13,15 @@ type State = {
   store: Item[];
   selected: Item | null;
   modal: "search" | "bag" | "user" | "";
-  bag: Item | null
+  filter: string;
+  bag: Item[];
 };
 let state: State = {
   store: [],
   selected: null,
   modal: "",
-  bag : null
+  filter: "",
+  bag: [],
 };
 let appEl = document.querySelector("#app");
 
@@ -88,10 +90,10 @@ function header() {
   let userSpanEl = document.createElement("span");
   userSpanEl.className = "material-symbols-outlined";
   userSpanEl.textContent = "person_filled";
-  userSpanEl.addEventListener("click",function(){
-    state.modal = "user"
-    render()
-  })
+  userSpanEl.addEventListener("click", function () {
+    state.modal = "user";
+    render();
+  });
 
   userLiEl.append(userSpanEl);
   shoppingBagLiEl.append(shoppingBagSpanEl);
@@ -158,7 +160,7 @@ function getData() {
     });
 }
 
-function singleProduct(store: Item) {
+function singleProduct(item: Item) {
   let mainEl = document.createElement("main");
 
   let navEl = document.createElement("nav");
@@ -171,35 +173,35 @@ function singleProduct(store: Item) {
   productsLiEl.className = "single-main-list-item";
   let imageEl = document.createElement("img");
   imageEl.className = "single-image";
-  imageEl.src = store.image;
-  imageEl.alt = store.title;
+  imageEl.src = item.image;
+  imageEl.alt = item.title;
 
   let titleEl = document.createElement("h3");
-  titleEl.textContent = store.title;
+  titleEl.textContent = item.title;
 
   let priceDivEl = document.createElement("div");
   priceDivEl.className = "price-container";
   let priceEl = document.createElement("span");
   priceEl.className = "price";
-  priceEl.textContent = `$ ${store.price}`;
+  priceEl.textContent = `$ ${item.price}`;
 
   let discountEl = document.createElement("span");
   discountEl.className = "discount";
-  discountEl.textContent = `$ ${store.discountPrice}`;
+  discountEl.textContent = `$ ${item.discountPrice}`;
 
   let desciptionEl = document.createElement("p");
-  desciptionEl.textContent = store.description;
+  desciptionEl.textContent = item.description;
 
-  let bagButtonEl = document.createElement("button")
-  bagButtonEl.textContent ="Add to bag..."
-  bagButtonEl.addEventListener("click",function(){
-    state.selected = store;
+  let bagButtonEl = document.createElement("button");
+  bagButtonEl.textContent = "Add to bag...";
+  bagButtonEl.addEventListener("click", function () {
+    // addToBag()
+    state.bag.push(item);
     render();
-  })
-  
+  });
 
   priceDivEl.append(priceEl, discountEl);
-  productsLiEl.append(imageEl, titleEl, priceDivEl, desciptionEl,bagButtonEl);
+  productsLiEl.append(imageEl, titleEl, priceDivEl, desciptionEl, bagButtonEl);
   ulEl.append(productsLiEl);
 
   navEl.append(ulEl);
@@ -261,8 +263,67 @@ function renderBagModal() {
   titleEl.textContent = "Bag";
 
   containerEl.append(closeButton, titleEl);
+
+  // if there is no item in the bag display the message
+
+  if (state.bag.length === 0) {
+    let messageEl = document.createElement("p");
+    messageEl.textContent = "your bag is currently empty.";
+    containerEl.append(messageEl);
+  }
+
+  // create a bag item for each item in the bag
+
+  for (let item of state.bag) {
+    renderBagItem(containerEl, item);
+  }
+
+ // if the bag is not empty then display a "pay now" button
+
+  if (state.bag.length !== 0) { //or >0
+     // get the total 
+     // create a total
+     let total = 0
+     // add the price of each item in the bag
+     for(let item of state.bag){
+      total = total + Number(item.discountPrice)
+     }
+     
+
+    let payNowButton = document.createElement("button");
+    payNowButton.textContent = `Pay Now $${total.toFixed(2)}`;
+    containerEl.append(payNowButton);
+  }
+
+
   wrapperEl.append(containerEl);
   appEl.append(wrapperEl);
+}
+
+function renderBagItem(containerEl: Element, item: Item) {
+  let bagProductImage = document.createElement("div");
+  bagProductImage.className = "bag-product-image";
+  let imageEL = document.createElement("img");
+  imageEL.src = item.image;
+  imageEL.className = "bag-image";
+
+  let bagProductInfo = document.createElement("div");
+  bagProductInfo.className = "bag-product-info";
+
+  let producTitleEl = document.createElement("h3");
+  producTitleEl.textContent = item.title;
+  let priceEl = document.createElement("span");
+  priceEl.className = "price";
+  priceEl.textContent = `$ ${item.price}`;
+  let discountEl = document.createElement("span");
+  discountEl.className = "discount";
+  discountEl.textContent = `$ ${item.discountPrice}`;
+  let removeButton = document.createElement("button");
+  removeButton.textContent = "Remove";
+
+  bagProductInfo.append(producTitleEl, priceEl, discountEl, removeButton);
+  bagProductImage.append(imageEL);
+  containerEl.append(bagProductImage, bagProductInfo);
 }
 
 function renderUserModal() {
@@ -294,7 +355,7 @@ function renderUserModal() {
   let inputEl = document.createElement("input");
   formEl.append(inputEl);
 
-  containerEl.append(closeButton, titleEl,formEl);
+  containerEl.append(closeButton, titleEl, formEl);
   wrapperEl.append(containerEl);
   appEl.append(wrapperEl);
 }
@@ -302,3 +363,5 @@ function renderUserModal() {
 getData();
 
 render();
+
+window.state = state;
