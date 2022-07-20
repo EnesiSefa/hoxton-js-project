@@ -57,6 +57,15 @@
       "discountPrice": "599.99",
       "description": "The Samsung Galaxy Note20 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
 
+    },
+    {
+      "id": 7,
+      "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-13-pro-max-silver-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1645552346280",
+      "title": "iPhone 13 Pro Max 256GB silver",
+      "price": "699.99",
+      "discountPrice": "599.99",
+      "description": "Get the new iPhone 13 Pro and iPhone 13 Pro Max from Apple. Shop online with free shipping."
+
     }
   ]
 }

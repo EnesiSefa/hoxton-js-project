@@ -13,14 +13,19 @@
 }
 #app{
   padding: 20px;
+  background-color: rgb(223, 224, 226)
+  
 }
 header{
   display: grid;
   grid-auto-flow: column;
+
+  background-color: rgb(162, 174, 187)
 }
 .header-list{
   display: grid;
   grid-auto-flow: column;
+  ;
 }
 
 .header-list-item{
@@ -29,6 +34,7 @@ header{
 
 
 main{
+  background-color: rgb(117, 171, 188);
   
 }
 
@@ -45,7 +51,7 @@ main{
 }
 .main-list-item{
   list-style: none;
-  outline: 1px solid black;
+  
 
 }
 .price-container{
@@ -67,6 +73,7 @@ main{
 }
 .image{
   width: 200px;
+  background-color: rgb(35, 181, 211);
 
 }
 
