@@ -13,6 +13,7 @@ type Item = {
 type State = {
   store: Item[];
   selected: Item | null;
+  page:"main" | "tv" | "phone" | "";
   modal: "search" | "bag" | "user" | "";
   filterByType: "tv" | "phone" | null;
   filterByTitle: string;
@@ -25,6 +26,7 @@ let state: State = {
   filterByType: null,
   filterByTitle: "",
   bag: [],
+  page:"main"
 };
 let appEl = document.querySelector("#app");
 
@@ -34,6 +36,13 @@ function render() {
   header();
 
   if (state.selected === null) {
+    if(state.filterByType === "phone"){
+   
+      ProductPage()
+    } else
+    if(state.filterByType === "tv"){
+      ProductPage()
+    }else
     main();
   } else {
     singleProduct(state.selected);
@@ -49,15 +58,9 @@ function render() {
   if (state.modal === "user") {
     renderUserModal();
   }
-
-  if(state.filterByType === "phone"){
-   
-    ProductPage()
-  }
-
-  if(state.filterByType === "tv"){
-    ProductPage()
-  }
+   let mainEl = document.createElement("main")
+   mainEl.textContent = ""
+  
 }
 
 function header() {
@@ -95,7 +98,7 @@ function header() {
   let homeTitleEL = document.createElement("h1");
   homeTitleEL.textContent = "Al Tech";
   homeTitleEL.addEventListener("click", function () {
-    state.selected = null;
+    state.filterByType = null;
     render();
     // main()
   });
@@ -265,6 +268,7 @@ function singleProduct(item: Item) {
 
 function ProductPage() {
   let mainEl = document.createElement("main");
+  mainEl.textContent = ""
 
   let navEl = document.createElement("nav");
   navEl.className = "main-nav";
