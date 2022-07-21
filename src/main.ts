@@ -36,11 +36,7 @@ function render() {
     singleProduct(state.selected);
   }
 
-  if(state.filter === ""){
-    main();
-  } else { 
-    main()
-  }
+  
    
   if (state.modal === "bag") {
     renderBagModal();
@@ -87,7 +83,8 @@ function header() {
   let homeTitleEL = document.createElement("h1");
   homeTitleEL.textContent = "Al Tech";
   homeTitleEL.addEventListener("click", function () {
-    state.selected = null;
+    state.filter = null
+    state.selected = null
     render();
     // main()
   });
