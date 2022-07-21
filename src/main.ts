@@ -266,7 +266,7 @@ function renderSearchModal() {
   formEl.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // state.filterByName = inputEl.value;
+    state.filterByTitle = inputEl.value;
     state.modal = "";
     render();
   });
