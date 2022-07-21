@@ -2,7 +2,7 @@ import "./style.css";
 
 type Item = {
   id: number;
-  type: String
+  type: String;
   image: string;
   title: string;
   price: string;
@@ -14,20 +14,23 @@ type State = {
   store: Item[];
   selected: Item | null;
   modal: "search" | "bag" | "user" | "";
-  filter: string | null
+  filterByType: "tv" | "phone" | null;
+  filterByTitle: string;
   bag: Item[];
 };
 let state: State = {
   store: [],
   selected: null,
   modal: "",
-  filter: "",
+  filterByType: null,
+  filterByTitle: "",
   bag: [],
 };
 let appEl = document.querySelector("#app");
 
 function render() {
   appEl.textContent = "";
+
   header();
 
   if (state.selected === null) {
@@ -36,8 +39,6 @@ function render() {
     singleProduct(state.selected);
   }
 
-  
-   
   if (state.modal === "bag") {
     renderBagModal();
   }
@@ -52,10 +53,10 @@ function render() {
 
 function header() {
   let headerEl = document.createElement("header");
-  
+
   let navEl1 = document.createElement("nav");
   navEl1.className = "left-header-nav";
-  
+
   let ulEl1 = document.createElement("ul");
   ulEl1.className = "header-list";
 
@@ -63,9 +64,9 @@ function header() {
   tvLiEl1.className = "header-list-item";
   let tvSpanEl1 = document.createElement("span");
   tvSpanEl1.className = "material-symbols-outlined";
-  tvSpanEl1.textContent = "tv"
+  tvSpanEl1.textContent = "tv";
   tvSpanEl1.addEventListener("click", function () {
-    state.filter = "tv";
+    state.filterByType = "tv";
     render();
   });
 
@@ -73,9 +74,9 @@ function header() {
   phoneLiEl1.className = "header-list-item";
   let phoneSpanEl1 = document.createElement("span");
   phoneSpanEl1.className = "material-symbols-outlined";
-  phoneSpanEl1.textContent = "phone_iphone"
+  phoneSpanEl1.textContent = "phone_iphone";
   phoneSpanEl1.addEventListener("click", function () {
-    state.filter = "phone";
+    state.filterByType = "phone";
     render();
   });
 
@@ -83,8 +84,7 @@ function header() {
   let homeTitleEL = document.createElement("h1");
   homeTitleEL.textContent = "Al Tech";
   homeTitleEL.addEventListener("click", function () {
-    
-    state.selected = null
+    state.selected = null;
     render();
     // main()
   });
@@ -130,12 +130,12 @@ function header() {
   searchLiEl2.append(searchSpanEl2);
   ulEl2.append(userLiEl2, shoppingBagLiEl2, searchLiEl2);
   navEl2.append(ulEl2);
-  tvLiEl1.append(tvSpanEl1)
-  phoneLiEl1.append(phoneSpanEl1)
-  ulEl1.append(tvLiEl1,phoneLiEl1)
-  navEl1.append(ulEl1)
+  tvLiEl1.append(tvSpanEl1);
+  phoneLiEl1.append(phoneSpanEl1);
+  ulEl1.append(tvLiEl1, phoneLiEl1);
+  navEl1.append(ulEl1);
   homeTitleLink.append(homeTitleEL);
-  headerEl.append(homeTitleLink,navEl1, navEl2);
+  headerEl.append(homeTitleLink, navEl1, navEl2);
   appEl?.append(headerEl);
 }
 
@@ -147,18 +147,9 @@ function main() {
 
   let ulEl = document.createElement("ul");
   ulEl.className = "main-list";
-  
-  
-  let filteredItems;
-  if (state.filter === null) {
-    filteredItems = state.store;
-  } else {
-    filteredItems = state.store.filter(
-      (item) => item.type === state.filter
-    );
-  }
 
-  for (let item of getProductName()) {
+  
+  for (let item of searchByName()) {
     let productsLiEl = document.createElement("li");
     productsLiEl.className = "main-list-item";
     let imageEl = document.createElement("img");
@@ -253,8 +244,6 @@ function singleProduct(item: Item) {
   appEl?.append(mainEl);
 }
 
-
-
 function renderSearchModal() {
   let wrapperEl = document.createElement("div");
   wrapperEl.className = "modal-wrapper";
@@ -277,7 +266,7 @@ function renderSearchModal() {
   formEl.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    state.filter = inputEl.value;
+    // state.filterByName = inputEl.value;
     state.modal = "";
     render();
   });
@@ -289,13 +278,26 @@ function renderSearchModal() {
   wrapperEl.append(containerEl);
   appEl.append(wrapperEl);
 }
+function filteredItems() {
+  let filteredProductItems;
+  if (state.filterByType === null) {
+    filteredProductItems = state.store;
+  } else {
+    filteredProductItems = state.store.filter(
+      (item) => item.type === state.filterByType
+    );
+  }
+}
 
-function getProductName() {
-  let getProductName = state.store.filter((item) =>
-    item.title.toUpperCase().includes(state.filter.toUpperCase())
+
+
+
+function searchByName() {
+  let searchbyProductName = state.store.filter((item) =>
+    item.title.toLowerCase().includes(state.filterByTitle.toLowerCase())
   );
 
-  return getProductName;
+  return searchbyProductName;
 }
 
 function renderBagModal() {
@@ -332,23 +334,22 @@ function renderBagModal() {
     renderBagItem(containerEl, item);
   }
 
- // if the bag is not empty then display a "pay now" button
+  // if the bag is not empty then display a "pay now" button
 
-  if (state.bag.length !== 0) { //or >0
-     // get the total 
-     // create a total
-     let total = 0
-     // add the price of each item in the bag
-     for(let item of state.bag){
-      total = total + Number(item.discountPrice)
-     }
-     
+  if (state.bag.length !== 0) {
+    //or >0
+    // get the total
+    // create a total
+    let total = 0;
+    // add the price of each item in the bag
+    for (let item of state.bag) {
+      total = total + Number(item.discountPrice);
+    }
 
     let payNowButton = document.createElement("button");
     payNowButton.textContent = `Pay Now $${total.toFixed(2)}`;
     containerEl.append(payNowButton);
   }
-
 
   wrapperEl.append(containerEl);
   appEl.append(wrapperEl);
@@ -401,7 +402,7 @@ function renderUserModal() {
   formEl.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    state.filter = inputEl.value;
+    state.filterByType = inputEl.value;
     state.modal = "";
     render();
   });
