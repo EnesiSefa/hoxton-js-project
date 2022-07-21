@@ -13,7 +13,8 @@ type State = {
   store: Item[];
   selected: Item | null;
   modal: "search" | "bag" | "user" | "";
-  filter: string;
+  page:"phone" | "tv";
+  filter: string | null;
   bag: Item[];
 };
 let state: State = {
@@ -208,6 +209,8 @@ function singleProduct(item: Item) {
   mainEl.append(navEl);
   appEl?.append(mainEl);
 }
+
+
 
 function renderSearchModal() {
   let wrapperEl = document.createElement("div");
