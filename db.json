@@ -2,6 +2,7 @@
   "store": [
     {
       "id": 1,
+      "type": "phone",
       "image": "https://images.samsung.com/is/image/samsung/p6pim/al/2202/gallery/al-galaxy-a53-5g-a536-sm-a536blbleuc-531392710?$650_519_PNG$",
       "title": "Samsung a53",
       "price": "399.99",
@@ -10,6 +11,7 @@
     },
     {
       "id": 2,
+      "type": "phone",
       "image": "https://images.samsung.com/al/smartphones/galaxy-s22-ultra/buy/02_carousel/04_basic-colors/s22_ultra_productkv_phantomblack_mo.jpg",
       "title": "Samsung s22 ultra",
       "price": "899.99",
@@ -18,6 +20,7 @@
     },
     {
       "id": 3,
+      "type": "phone",
       "image": "https://images.samsung.com/pk/smartphones/galaxy-z-flip3-5g/buy/zflip3_carousel_colorcombokv_mo.jpg",
       "title": "Samsung Galaxy Z flip 3",
       "price": "699.99",
@@ -26,6 +29,7 @@
     },
     {
       "id": 4,
+      "type": "phone",
       "image": "https://images.samsung.com/ca/smartphones/galaxy-note20/buy/005-galaxynote20ultra-mysticblack-mo-720.jpg",
       "title": "Samsung Note20",
       "price": "699.99",
@@ -34,6 +38,7 @@
     },
     {
       "id": 5,
+      "type": "phone",
       "image": "https://images.samsung.com/ca/smartphones/galaxy-note20/buy/005-galaxynote20ultra-mysticblack-mo-720.jpg",
       "title": "Samsung Note20",
       "price": "699.99",
@@ -42,6 +47,7 @@
     },
     {
       "id": 6,
+      "type": "phone",
       "image": "https://images.samsung.com/ca/smartphones/galaxy-note20/buy/005-galaxynote20ultra-mysticblack-mo-720.jpg",
 
       "title": "Samsung Note20",
@@ -51,6 +57,7 @@
     },
     {
       "id": 7,
+      "type": "tv",
       "image": "https://globe.al/images/thumbnails/720/720/detailed/351/UE43AU8072A.jpg",
       "title": "Samsung 43 4K UE43AU8072UXXH",
       "price": "699.99",
@@ -60,6 +67,7 @@
     },
     {
       "id": 7,
+      "type": "phone",
       "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-13-pro-max-silver-select?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1645552346280",
       "title": "iPhone 13 Pro Max 256GB silver",
       "price": "699.99",

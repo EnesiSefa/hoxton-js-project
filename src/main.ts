@@ -2,6 +2,7 @@ import "./style.css";
 
 type Item = {
   id: number;
+  type: String
   image: string;
   title: string;
   price: string;
@@ -13,7 +14,7 @@ type State = {
   store: Item[];
   selected: Item | null;
   modal: "search" | "bag" | "user" | "";
-  filter: string;
+  filter: string | null
   bag: Item[];
 };
 let state: State = {
@@ -35,6 +36,13 @@ function render() {
     singleProduct(state.selected);
   }
 
+  if(state.filter === ""){
+    main();
+  } else { 
+
+
+  }
+   
   if (state.modal === "bag") {
     renderBagModal();
   }
@@ -49,6 +57,32 @@ function render() {
 
 function header() {
   let headerEl = document.createElement("header");
+  
+  let navEl1 = document.createElement("nav");
+  navEl1.className = "left-header-nav";
+  
+  let ulEl1 = document.createElement("ul");
+  ulEl1.className = "header-list";
+
+  let tvLiEl1 = document.createElement("li");
+  tvLiEl1.className = "header-list-item";
+  let tvSpanEl1 = document.createElement("span");
+  tvSpanEl1.className = "material-symbols-outlined";
+  tvSpanEl1.textContent = "tv"
+  tvSpanEl1.addEventListener("click", function () {
+    state.filter = "tv";
+    render();
+  });
+
+  let phoneLiEl1 = document.createElement("li");
+  phoneLiEl1.className = "header-list-item";
+  let phoneSpanEl1 = document.createElement("span");
+  phoneSpanEl1.className = "material-symbols-outlined";
+  phoneSpanEl1.textContent = "phone_iphone"
+  phoneSpanEl1.addEventListener("click", function () {
+    state.filter = "phone";
+    render();
+  });
 
   let homeTitleLink = document.createElement("a");
   let homeTitleEL = document.createElement("h1");
@@ -59,49 +93,53 @@ function header() {
     // main()
   });
 
-  let navEl = document.createElement("nav");
-  navEl.className = "header-nav";
+  let navEl2 = document.createElement("nav");
+  navEl2.className = "right-header-nav";
 
-  let ulEl = document.createElement("ul");
-  ulEl.className = "header-list";
+  let ulEl2 = document.createElement("ul");
+  ulEl2.className = "header-list";
 
-  let searchLiEl = document.createElement("li");
-  searchLiEl.className = "header-list-item";
-  let searchSpanEl = document.createElement("span");
-  searchSpanEl.className = "material-symbols-outlined";
-  searchSpanEl.textContent = "search";
-  searchSpanEl.addEventListener("click", function () {
+  let searchLiEl2 = document.createElement("li");
+  searchLiEl2.className = "header-list-item";
+  let searchSpanEl2 = document.createElement("span");
+  searchSpanEl2.className = "material-symbols-outlined";
+  searchSpanEl2.textContent = "search";
+  searchSpanEl2.addEventListener("click", function () {
     state.modal = "search";
     render();
   });
 
-  let shoppingBagLiEl = document.createElement("li");
-  shoppingBagLiEl.className = "header-list-item";
-  let shoppingBagSpanEl = document.createElement("span");
-  shoppingBagSpanEl.className = "material-symbols-outlined";
-  shoppingBagSpanEl.textContent = "shopping_bag";
-  shoppingBagSpanEl.addEventListener("click", function () {
+  let shoppingBagLiEl2 = document.createElement("li");
+  shoppingBagLiEl2.className = "header-list-item";
+  let shoppingBagSpanEl2 = document.createElement("span");
+  shoppingBagSpanEl2.className = "material-symbols-outlined";
+  shoppingBagSpanEl2.textContent = "shopping_bag";
+  shoppingBagSpanEl2.addEventListener("click", function () {
     state.modal = "bag";
     render();
   });
 
-  let userLiEl = document.createElement("li");
-  userLiEl.className = "header-list-item";
-  let userSpanEl = document.createElement("span");
-  userSpanEl.className = "material-symbols-outlined";
-  userSpanEl.textContent = "person_filled";
-  userSpanEl.addEventListener("click", function () {
+  let userLiEl2 = document.createElement("li");
+  userLiEl2.className = "header-list-item";
+  let userSpanEl2 = document.createElement("span");
+  userSpanEl2.className = "material-symbols-outlined";
+  userSpanEl2.textContent = "person_filled";
+  userSpanEl2.addEventListener("click", function () {
     state.modal = "user";
     render();
   });
 
-  userLiEl.append(userSpanEl);
-  shoppingBagLiEl.append(shoppingBagSpanEl);
-  searchLiEl.append(searchSpanEl);
-  ulEl.append(userLiEl, shoppingBagLiEl, searchLiEl);
-  navEl.append(ulEl);
+  userLiEl2.append(userSpanEl2);
+  shoppingBagLiEl2.append(shoppingBagSpanEl2);
+  searchLiEl2.append(searchSpanEl2);
+  ulEl2.append(userLiEl2, shoppingBagLiEl2, searchLiEl2);
+  navEl2.append(ulEl2);
+  tvLiEl1.append(tvSpanEl1)
+  phoneLiEl1.append(phoneSpanEl1)
+  ulEl1.append(tvLiEl1,phoneLiEl1)
+  navEl1.append(ulEl1)
   homeTitleLink.append(homeTitleEL);
-  headerEl.append(homeTitleLink, navEl);
+  headerEl.append(homeTitleLink,navEl1, navEl2);
   appEl?.append(headerEl);
 }
 
@@ -113,8 +151,18 @@ function main() {
 
   let ulEl = document.createElement("ul");
   ulEl.className = "main-list";
+  
+  
+  let filteredItems;
+  if (state.filter === null) {
+    filteredItems = state.store;
+  } else {
+    filteredItems = state.store.filter(
+      (item) => item.type === state.filter
+    );
+  }
 
-  for (let item of state.store) {
+  for (let item of filteredItems) {
     let productsLiEl = document.createElement("li");
     productsLiEl.className = "main-list-item";
     let imageEl = document.createElement("img");
