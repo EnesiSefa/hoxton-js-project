@@ -83,7 +83,7 @@ function header() {
   let homeTitleEL = document.createElement("h1");
   homeTitleEL.textContent = "Al Tech";
   homeTitleEL.addEventListener("click", function () {
-    state.filter = null
+    
     state.selected = null
     render();
     // main()
@@ -158,7 +158,7 @@ function main() {
     );
   }
 
-  for (let item of filteredItems) {
+  for (let item of getProductName()) {
     let productsLiEl = document.createElement("li");
     productsLiEl.className = "main-list-item";
     let imageEl = document.createElement("img");
@@ -288,6 +288,14 @@ function renderSearchModal() {
   containerEl.append(closeButton, titleEl, formEl);
   wrapperEl.append(containerEl);
   appEl.append(wrapperEl);
+}
+
+function getProductName() {
+  let getProductName = state.store.filter((item) =>
+    item.title.toUpperCase().includes(state.filter.toUpperCase())
+  );
+
+  return getProductName;
 }
 
 function renderBagModal() {
