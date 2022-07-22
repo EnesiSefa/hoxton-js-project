@@ -110,13 +110,13 @@
       "description": "LED TV Fuego, 43 Full HD is a TV which allows you a very clear view of the screen thanks to his Full HD resolution. You can use this television as radio or see films recorded on USB."
     }
   ],
-  
+
   "users": [
     {
       "id": 1,
-      "name": "Enesi",
-      "email": "enesi@gmail.com",
-      "password": "enesi"
+      "name": "Enes",
+      "email": "enes@gmail.com",
+      "password": "enes"
     },
     {
       "id": 2,

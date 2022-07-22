@@ -27,7 +27,6 @@ type State = {
   bag: Item[];
   currentUser: null | User;
   errorMessage: null | string;
-
 };
 const state: State = {
   users: [],
@@ -68,12 +67,10 @@ function render() {
   if (state.modal === "user") {
     renderUserModal();
   }
-  }
-  
+}
 
-  // let mainEl = document.createElement("main");
-  // mainEl.textContent = "";
-
+// let mainEl = document.createElement("main");
+// mainEl.textContent = "";
 
 function header() {
   let headerEl = document.createElement("header");
@@ -465,48 +462,43 @@ function renderUserModal() {
   });
 
   for (let user of state.users) {
-    const welcomeText = document.createElement('h1');
-    welcomeText.textContent = `Welcome aboard, ${user.name}`
+    const welcomeText = document.createElement("h1");
+    welcomeText.textContent = `Welcome aboard, ${user.name}`;
   }
 
-    const buttonElLogOut = document.createElement('button');
-    buttonElLogOut.textContent = "Log out"
-    buttonElLogOut.addEventListener('click', () => {
-      state.currentUser = null;
-      state.errorMessage = null;
-      localStorage.clear();
-})
+  const buttonElLogOut = document.createElement("button");
+  buttonElLogOut.textContent = "Log out";
+  buttonElLogOut.addEventListener("click", () => {
+    state.currentUser = null;
+    state.errorMessage = null;
+    localStorage.clear();
+  });
 
   let titleEl = document.createElement("h2");
   titleEl.textContent = "User";
   let formEl = document.createElement("form");
-  formEl.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    state.filterByType = inputEl.value;
-    state.modal = "";
-    render();
-  });
+  formEl.className = "user-form"
 
   let inputEmail = document.createElement("input");
-  inputEmail.placeholder ='Email'
-  inputEmail.type = "email"
-  let inputPassword = document.createElement("input")
-  inputPassword.placeholder = 'Password'
-  inputPassword.type = "password"
+  inputEmail.placeholder = "Email";
+  inputEmail.type = "email";
+  let inputPassword = document.createElement("input");
+  inputPassword.placeholder = "Password";
+  inputPassword.type = "password";
 
-  let buttonEl = document.createElement('button');
-    buttonEl.type = 'submit'
-    buttonEl.textContent = "Log in"
+  let buttonEl = document.createElement("button");
+  buttonEl.type = "submit";
+  buttonEl.textContent = "Log in";
 
-    formEl.addEventListener('submit', (event) => {
-      event.preventDefault()
+  formEl.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-      const email = inputEmail.value;
-      const password = inputPassword.value;
+    const email = inputEmail.value;
+    const password = inputPassword.value;
+    
 
-      login(email, password) 
-    })
+    login(email, password);
+  });
   formEl.append(inputEmail, inputPassword, buttonEl);
 
   containerEl.append(closeButton, titleEl, formEl);
