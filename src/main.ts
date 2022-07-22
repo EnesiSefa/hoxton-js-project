@@ -528,6 +528,7 @@ function login(email: string, password: string) {
         // TODO: this needs fixing for failed login => correct login path :P
         state.errorMessage = "No user found!";
       }
+      
 
       render();
     });
