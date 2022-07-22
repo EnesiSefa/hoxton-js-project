@@ -174,7 +174,6 @@ function main() {
 
   let ulEl = document.createElement("ul");
   ulEl.className = "main-list";
-
   for (let item of searchByName()) {
     let productsLiEl = document.createElement("li");
     productsLiEl.className = "main-list-item";
