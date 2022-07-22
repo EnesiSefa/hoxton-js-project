@@ -491,8 +491,10 @@ function renderUserModal() {
 
   let inputEmail = document.createElement("input");
   inputEmail.placeholder ='Email'
+  inputEmail.type = "email"
   let inputPassword = document.createElement("input")
   inputPassword.placeholder = 'Password'
+  inputPassword.type = "password"
 
   let buttonEl = document.createElement('button');
     buttonEl.type = 'submit'

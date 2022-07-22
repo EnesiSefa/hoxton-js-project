@@ -13,14 +13,14 @@
 }
 #app{
   padding: 20px;
-  background-color: rgb(223, 224, 226)
+  
   
 }
 header{
   display: grid;
   grid-auto-flow: column;
 
-  background-color: rgb(162, 174, 187)
+  
 }
 .header-list{
   display: grid;
@@ -34,7 +34,7 @@ header{
 
 
 main{
-  background-color: rgb(117, 171, 188);
+  
   
 }
 
@@ -75,7 +75,7 @@ main{
 }
 .image{
   width: 200px;
-  background-color: rgb(35, 181, 211);
+  
 
 }
 
@@ -131,3 +131,4 @@ main{
 @media screen {
   
 }
+
