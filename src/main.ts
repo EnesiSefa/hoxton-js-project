@@ -17,7 +17,7 @@ type User = {
 };
 
 type State = {
-  users: User[];
+  // users: User[];
   store: Item[];
   selected: Item | null;
   // page:"main" | "tv" | "phone" | "";
@@ -29,7 +29,7 @@ type State = {
   errorMessage: null | string;
 };
 const state: State = {
-  users: [],
+
   store: [],
   selected: null,
   modal: "",
@@ -105,7 +105,7 @@ function header() {
 
   let homeTitleLink = document.createElement("a");
   let homeTitleEL = document.createElement("h1");
-  homeTitleEL.textContent = "Al Tech";
+  homeTitleEL.textContent = state.currentUser ? state.currentUser.name : "Al Tech";
   homeTitleEL.addEventListener("click", function () {
     state.filterByType = null;
     state.selected = null;
@@ -461,47 +461,51 @@ function renderUserModal() {
     render();
   });
 
-  for (let user of state.users) {
+
+  if (state.currentUser) {
     const welcomeText = document.createElement("h1");
-    welcomeText.textContent = `Welcome aboard, ${user.name}`;
+    welcomeText.textContent = `Welcome aboard, ${state.currentUser.name}`;
+    containerEl.append(welcomeText,);
+  } else {
+    const buttonElLogOut = document.createElement("button");
+    buttonElLogOut.textContent = "Log out";
+    buttonElLogOut.addEventListener("click", () => {
+      state.currentUser = null;
+      state.errorMessage = null;
+      localStorage.clear();
+      
+    });
+
+    let titleEl = document.createElement("h2");
+    titleEl.textContent = "User";
+    let formEl = document.createElement("form");
+    formEl.className = "user-form"
+
+    let inputEmail = document.createElement("input");
+    inputEmail.placeholder = "Email";
+    inputEmail.type = "email";
+    let inputPassword = document.createElement("input");
+    inputPassword.placeholder = "Password";
+    inputPassword.type = "password";
+
+    let buttonEl = document.createElement("button");
+    buttonEl.type = "submit";
+    buttonEl.textContent = "Log in";
+
+    formEl.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const email = inputEmail.value;
+      const password = inputPassword.value;
+
+
+      login(email, password);
+    });
+    formEl.append(inputEmail, inputPassword, buttonEl);
+    containerEl.append(closeButton, titleEl, formEl);
   }
 
-  const buttonElLogOut = document.createElement("button");
-  buttonElLogOut.textContent = "Log out";
-  buttonElLogOut.addEventListener("click", () => {
-    state.currentUser = null;
-    state.errorMessage = null;
-    localStorage.clear();
-  });
-
-  let titleEl = document.createElement("h2");
-  titleEl.textContent = "User";
-  let formEl = document.createElement("form");
-  formEl.className = "user-form"
-
-  let inputEmail = document.createElement("input");
-  inputEmail.placeholder = "Email";
-  inputEmail.type = "email";
-  let inputPassword = document.createElement("input");
-  inputPassword.placeholder = "Password";
-  inputPassword.type = "password";
-
-  let buttonEl = document.createElement("button");
-  buttonEl.type = "submit";
-  buttonEl.textContent = "Log in";
-
-  formEl.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const email = inputEmail.value;
-    const password = inputPassword.value;
-    
-
-    login(email, password);
-  });
-  formEl.append(inputEmail, inputPassword, buttonEl);
-
-  containerEl.append(closeButton, titleEl, formEl);
+  containerEl.append(closeButton);
   wrapperEl.append(containerEl);
   appEl.append(wrapperEl);
 }
@@ -509,6 +513,7 @@ function login(email: string, password: string) {
   fetch("http://localhost:3005/users")
     .then((r) => r.json())
     .then((users: User[]) => {
+
       const foundUser = users.find(
         (user) =>
           user.email.toLowerCase() === email.toLowerCase() &&
@@ -518,6 +523,7 @@ function login(email: string, password: string) {
       if (foundUser) {
         state.currentUser = foundUser;
         localStorage.id = foundUser.id;
+        state.modal = ''
       } else {
         // TODO: this needs fixing for failed login => correct login path :P
         state.errorMessage = "No user found!";
