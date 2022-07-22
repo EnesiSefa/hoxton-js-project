@@ -66,54 +66,55 @@ function render() {
 
   if (state.modal === "user") {
     renderUserModal();
-  }
-  if (state.currentUser) {
-    const welcomeText = document.createElement("h1");
-    welcomeText.textContent = `Welcome aboard, ${state.currentUser.name}`;
-
-    const buttonEl = document.createElement("button");
-    buttonEl.textContent = "Log out";
-    buttonEl.addEventListener("click", () => {
-      state.currentUser = null;
+    if (state.currentUser) {
+      const welcomeText = document.createElement("h1");
+      welcomeText.textContent = `Welcome aboard, ${state.currentUser.name}`;
+  
+      const buttonEl = document.createElement("button");
+      buttonEl.textContent = "Log out";
+      buttonEl.addEventListener("click", () => {
+        state.currentUser = null;
+        state.errorMessage = null;
+        localStorage.clear();
+        render();
+      });
+      appEl.append(welcomeText, buttonEl);
+    } else {
+      const formEl = document.createElement("form");
+      const formTitle = document.createElement("h3");
+      formTitle.textContent = "Please log in to see a message!";
+  
+      const emailInput = document.createElement("input");
+      emailInput.placeholder = "Email";
+      const passwordInput = document.createElement("input");
+      passwordInput.type = "password";
+      passwordInput.placeholder = "Pw";
+  
+      const buttonEl = document.createElement("button");
+      buttonEl.type = "submit";
+      buttonEl.textContent = "Log in";
+  
+      formEl.addEventListener("submit", (event) => {
+        event.preventDefault();
+  
+        const email = emailInput.value;
+        const password = passwordInput.value;
+  
+        login(email, password);
+      });
+  
+      formEl.append(formTitle, emailInput, passwordInput, buttonEl);
+      appEl.append(formEl);
+    }
+    if (state.errorMessage) {
+      const errorSpan = document.createElement("span");
+      errorSpan.textContent = state.errorMessage;
+  
+      appEl.append(errorSpan);
       state.errorMessage = null;
-      localStorage.clear();
-      render();
-    });
-    appEl.append(welcomeText, buttonEl);
-  } else {
-    const formEl = document.createElement("form");
-    const formTitle = document.createElement("h3");
-    formTitle.textContent = "Please log in to see a message!";
-
-    const emailInput = document.createElement("input");
-    emailInput.placeholder = "Email";
-    const passwordInput = document.createElement("input");
-    passwordInput.type = "password";
-    passwordInput.placeholder = "Pw";
-
-    const buttonEl = document.createElement("button");
-    buttonEl.type = "submit";
-    buttonEl.textContent = "Log in";
-
-    formEl.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const email = emailInput.value;
-      const password = passwordInput.value;
-
-      login(email, password);
-    });
-
-    formEl.append(formTitle, emailInput, passwordInput, buttonEl);
-    appEl.append(formEl);
+    }
   }
-  if (state.errorMessage) {
-    const errorSpan = document.createElement("span");
-    errorSpan.textContent = state.errorMessage;
-
-    appEl.append(errorSpan);
-    state.errorMessage = null;
-  }
+  
 
   // let mainEl = document.createElement("main");
   // mainEl.textContent = "";
@@ -510,7 +511,7 @@ function renderUserModal() {
   });
 
   let titleEl = document.createElement("h2");
-  titleEl.textContent = "user";
+  titleEl.textContent = "User";
   let formEl = document.createElement("form");
   formEl.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -520,8 +521,24 @@ function renderUserModal() {
     render();
   });
 
-  let inputEl = document.createElement("input");
-  formEl.append(inputEl);
+  let inputEmail = document.createElement("input");
+  inputEmail.placeholder ='Email'
+  let inputPassword = document.createElement("input")
+  inputPassword.placeholder = 'Password'
+
+  let buttonEl = document.createElement('button');
+    buttonEl.type = 'submit'
+    buttonEl.textContent = "Log in"
+
+    formEl.addEventListener('submit', (event) => {
+      event.preventDefault()
+
+      const email = inputEmail.value;
+      const password = inputPassword.value;
+
+      login(email, password) 
+    })
+  formEl.append(inputEmail, inputPassword, buttonEl);
 
   containerEl.append(closeButton, titleEl, formEl);
   wrapperEl.append(containerEl);

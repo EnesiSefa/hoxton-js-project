@@ -114,11 +114,13 @@
   "users": [
     {
       "id": 1,
+      "name": "Enesi",
       "email": "enesi@gmail.com",
       "password": "enesi"
     },
     {
       "id": 2,
+      "name": "Kabil",
       "email": "kabil@gmail.com",
       "password": "kabil"
     }
