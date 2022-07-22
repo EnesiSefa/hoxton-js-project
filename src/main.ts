@@ -9,24 +9,36 @@ type Item = {
   discountPrice: string;
   description: string;
 };
+type User = {
+  id: number;
+  email: string;
+  password: string;
+  name: string;
+};
 
 type State = {
+  users: User[];
   store: Item[];
   selected: Item | null;
-  page:"main" | "tv" | "phone" | "";
+  // page:"main" | "tv" | "phone" | "";
   modal: "search" | "bag" | "user" | "";
   filterByType: "tv" | "phone" | null;
   filterByTitle: string;
   bag: Item[];
+  currentUser: null | User;
+  errorMessage: null | string;
 };
-let state: State = {
+const state: State = {
+  users: [],
   store: [],
   selected: null,
   modal: "",
   filterByType: null,
   filterByTitle: "",
   bag: [],
-  page:"main"
+  currentUser: null,
+  errorMessage: null,
+  // page:"main"
 };
 let appEl = document.querySelector("#app");
 
@@ -36,14 +48,11 @@ function render() {
   header();
 
   if (state.selected === null) {
-    if(state.filterByType === "phone"){
-   
-      ProductPage()
-    } else
-    if(state.filterByType === "tv"){
-      ProductPage()
-    }else
-    main();
+    if (state.filterByType === "phone") {
+      phoneOrTvPage();
+    } else if (state.filterByType === "tv") {
+      phoneOrTvPage();
+    } else main();
   } else {
     singleProduct(state.selected);
   }
@@ -58,9 +67,56 @@ function render() {
   if (state.modal === "user") {
     renderUserModal();
   }
-   let mainEl = document.createElement("main")
-   mainEl.textContent = ""
-  
+  if (state.currentUser) {
+    const welcomeText = document.createElement("h1");
+    welcomeText.textContent = `Welcome aboard, ${state.currentUser.name}`;
+
+    const buttonEl = document.createElement("button");
+    buttonEl.textContent = "Log out";
+    buttonEl.addEventListener("click", () => {
+      state.currentUser = null;
+      state.errorMessage = null;
+      localStorage.clear();
+      render();
+    });
+    appEl.append(welcomeText, buttonEl);
+  } else {
+    const formEl = document.createElement("form");
+    const formTitle = document.createElement("h3");
+    formTitle.textContent = "Please log in to see a message!";
+
+    const emailInput = document.createElement("input");
+    emailInput.placeholder = "Email";
+    const passwordInput = document.createElement("input");
+    passwordInput.type = "password";
+    passwordInput.placeholder = "Pw";
+
+    const buttonEl = document.createElement("button");
+    buttonEl.type = "submit";
+    buttonEl.textContent = "Log in";
+
+    formEl.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      login(email, password);
+    });
+
+    formEl.append(formTitle, emailInput, passwordInput, buttonEl);
+    appEl.append(formEl);
+  }
+  if (state.errorMessage) {
+    const errorSpan = document.createElement("span");
+    errorSpan.textContent = state.errorMessage;
+
+    appEl.append(errorSpan);
+    state.errorMessage = null;
+  }
+
+  // let mainEl = document.createElement("main");
+  // mainEl.textContent = "";
 }
 
 function header() {
@@ -90,7 +146,7 @@ function header() {
   phoneSpanEl1.textContent = "phone_iphone";
   phoneSpanEl1.addEventListener("click", function () {
     state.filterByType = "phone";
-    
+
     render();
   });
 
@@ -99,6 +155,7 @@ function header() {
   homeTitleEL.textContent = "Al Tech";
   homeTitleEL.addEventListener("click", function () {
     state.filterByType = null;
+    state.selected = null;
     render();
     // main()
   });
@@ -161,15 +218,6 @@ function main() {
 
   let ulEl = document.createElement("ul");
   ulEl.className = "main-list";
-
-  let filteredProductItems;
-  if (state.filterByType === null) {
-    filteredProductItems = state.store;
-  } else {
-    filteredProductItems = state.store.filter(
-      (item) => item.type === state.filterByType
-    );
-  }
 
   for (let item of searchByName()) {
     let productsLiEl = document.createElement("li");
@@ -266,9 +314,9 @@ function singleProduct(item: Item) {
   appEl?.append(mainEl);
 }
 
-function ProductPage() {
+function phoneOrTvPage() {
   let mainEl = document.createElement("main");
-  mainEl.textContent = ""
+  mainEl.textContent = "";
 
   let navEl = document.createElement("nav");
   navEl.className = "main-nav";
@@ -479,6 +527,46 @@ function renderUserModal() {
   wrapperEl.append(containerEl);
   appEl.append(wrapperEl);
 }
+function login(email: string, password: string) {
+  fetch("http://localhost:3005/users")
+    .then((r) => r.json())
+    .then((users: User[]) => {
+      const foundUser = users.find(
+        (user) =>
+          user.email.toLowerCase() === email.toLowerCase() &&
+          user.password === password
+      );
+
+      if (foundUser) {
+        state.currentUser = foundUser;
+        localStorage.id = foundUser.id;
+      } else {
+        // TODO: this needs fixing for failed login => correct login path :P
+        state.errorMessage = "No user found!";
+      }
+
+      render();
+    });
+}
+
+function checkIfUserIsStoredLocallyAndLogInIfTheyDo() {
+  // 1. check for user in localstorage
+  const userId = localStorage.id;
+
+  // 2. if the user is there => use it to login
+  if (userId) {
+    fetch(`http://localhost:3005/users/${userId}`)
+      .then((r) => r.json())
+      .then((user) => {
+        state.currentUser = user;
+        render();
+      });
+  } else {
+    // 3. if not => show message to relogin - feel free to add one
+  }
+}
+
+checkIfUserIsStoredLocallyAndLogInIfTheyDo();
 
 getData();
 

@@ -63,7 +63,6 @@
       "price": "699.99",
       "discountPrice": "599.99",
       "description": "The Samsung Galaxy Note20 Ultra is the ultimate Samsung flagship, and it's our pick for the best Samsung phone right now."
-
     },
     {
       "id": 7,
@@ -73,7 +72,6 @@
       "price": "699.99",
       "discountPrice": "599.99",
       "description": "Get the new iPhone 13 Pro and iPhone 13 Pro Max from Apple. Shop online with free shipping."
-
     },
     {
       "id": 8,
@@ -83,7 +81,6 @@
       "price": "469.99",
       "discountPrice": "399.99",
       "description": "More consistent colour and contrast from any seats Active HDR expanding your HDR choices Contrast booster for HDR-like viewing The science of light control Upscale the resolution to 4K quality Surround yourself in rich sound"
-
     },
     {
       "id": 9,
@@ -93,7 +90,6 @@
       "price": "1299.99",
       "discountPrice": "999.99",
       "description": "Resolution: 4K UltrAHD (3840 x 2160) | Refresh Rate:60 hertz Connectivity: 3 HDMI ports to connect set top box, Blu Ray players, gaming console | 2 USB ports to connect hard drives and other USB devices Display: X1 | 4K HDR | Live Colour Display | 4K X-Reality Pro | Motionflow XR100"
-
     },
     {
       "id": 10,
@@ -103,7 +99,6 @@
       "price": "399.99",
       "discountPrice": "299.99",
       "description": "Frameless intelligent TV"
-
     },
     {
       "id": 11,
@@ -113,7 +108,19 @@
       "price": "399.99",
       "discountPrice": "299.99",
       "description": "LED TV Fuego, 43 Full HD is a TV which allows you a very clear view of the screen thanks to his Full HD resolution. You can use this television as radio or see films recorded on USB."
-
+    }
+  ],
+  
+  "users": [
+    {
+      "id": 1,
+      "email": "enesi@gmail.com",
+      "password": "enesi"
+    },
+    {
+      "id": 2,
+      "email": "kabil@gmail.com",
+      "password": "kabil"
     }
   ]
 }
